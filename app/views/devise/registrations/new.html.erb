@@ -1,0 +1,39 @@
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+	<h2>Your Info</h2>
+	<p>Please enter your contact info below to begin the nomination process.  If you've already signed up, you will need to login using the link provided in the confirmation email.</p>
+	
+	
+	<div class='clearfix'>
+		
+		<div class='span-8'>
+			<%= f.label :first_name, "First Name*" %><br />
+			<%= f.text_field :first_name %>
+		</div>
+		
+		<div class='span-8'>
+			<%= f.label :last_name, "Last Name*" %><br />
+			<%= f.text_field :last_name %>
+		</div>
+		
+		<div class='span-8 last'>
+			<%= f.label :email %><br />
+			<%= f.email_field :email %>
+		</div>
+	</div>
+
+		<% @password = Digest::SHA1.hexdigest(Time.now.to_s + Rails.application.config.secret_token) %>
+		<%= f.hidden_field :password, :value => @password %>
+  	  	<%= f.hidden_field :password_confirmation, :value => @password %>
+
+		<p><%= f.submit "Sign up" %></p>
+		
+<% end %>
+
+<button>
+	<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+<% end -%>
+</button>

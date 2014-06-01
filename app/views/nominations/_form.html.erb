@@ -1,0 +1,65 @@
+<%= form_for(@nomination, :html => { :multipart => true }) do |f| %>
+	<% if @nomination.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@nomination.errors.count, "error") %> prohibited this nomination from being saved:</h2>
+			<ul>
+				 <% @nomination.errors.full_messages.each do |msg| %>
+				 	<li><%= msg %></li>
+				 <% end %>
+			</ul>
+		</div>
+	<% end %>
+
+		<h2>Nominee</h2>
+		<div class='span-8'>
+			<%= f.label :nominee_firstname, "Nominee First Name*" %><br />
+			<%= f.text_field :nominee_firstname %>
+		</div>
+		<div class='span-8'>
+			<%= f.label :nominee_lastname, "Nominee Last Name*" %><br />
+			<%= f.text_field :nominee_lastname %>
+		</div>
+		<div class='span-8 last'>
+			<%= f.label :nominee_department, "Nominee Department*" %><br />
+			<%= f.text_field :nominee_department %>
+		</div>
+		<small><strong>* denotes required fields</strong></small>
+	</div>
+
+	<div class='clearfix'>
+		<div class='span-16 border'>	
+			<div class='span-8'>
+				<%= f.label :nominator_letter %><br />
+				<%= f.file_field :nominator_letter %>
+			</div>
+			<div class='span-8 last'>
+				<%= f.label :nominee_resume %><br />
+				<%= f.file_field :nominee_resume %>
+			</div>
+	
+			<div class='span-8'>
+				<%= f.label :nominee_transcript %><br />
+				<%= f.file_field :nominee_transcript %>
+			</div>
+			<div class='span-8 last'>
+				<%= f.label :nominee_statement %><br />
+				<%= f.file_field :nominee_statement %>
+			</div>
+	
+			<div class='span-16'>
+				<%= f.label :misc_document, "Additional Document(s)"%><br /><small>*Please create a zip archive if you need to upload more than one document.</small>
+				<%= f.file_field :misc_document %>
+			</div>		
+		</div>
+		<div class='span-7  prepend-1 last'>
+			<%= f.label :nominee_portrait %><br />
+			<%= content_tag 'div', image_tag(@nomination.nominee_portrait.url(:thumb)), :id => 'portrait' if @nomination.nominee_portrait_file_name %>
+			<%= f.file_field :nominee_portrait %>
+		</div>
+	</div>
+
+	<p class='center'><em>You can save this form at any time. A confirmation email containing an update link will be sent upon any modifications to the nomination.</em></p>
+
+
+	<div class='right' id="submit"><%= f.submit "Save Changes", :class => 'positive button', :onclick => "$('#nomination_submit').hide();$('#overlay').show();$('#opaque_overlay').show();$('#wait_box').show();" %></div>
+<% end %>

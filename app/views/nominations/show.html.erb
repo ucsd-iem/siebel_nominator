@@ -1,0 +1,27 @@
+<% title "Nomination" %>
+<div id='nomination' class="nomination clearfix">
+	<div class='span-12'>
+		<h2><%=h @nomination.nominee_name %></h2>
+		<p>
+			<strong>Created:</strong> <%= @nomination.created_at.strftime("%b %e, %l:%M %p") %> / 
+			<strong>Updated:</strong> <%= @nomination.updated_at.strftime("%b %e, %l:%M %p") %><br />
+			
+			<strong>Nominated by</strong> <%= @nomination.user.name %> / <%=mail_to @nomination.user.email %>
+		</p>
+		<p>
+			<%= content_tag :span, @nomination.nominator_letter_file_name ? raw("<strong>Nomination Letter</strong> #{link_to @nomination.nominator_letter_file_name, nomination_download_letter_url(@nomination.id)}<br />") : raw("<strong>Nomination Letter(s)</strong> <span class='negative'>Missing</span><br />") %>
+			<%= content_tag :span, @nomination.nominee_resume_file_name ? raw("<strong>Nominee Resume(s)</strong> #{link_to @nomination.nominee_resume_file_name, nomination_download_resume_url(@nomination.id)}<br />") : raw("<strong>Nominee Resume(s)</strong> <span class='negative'>Missing</span><br />")  %>
+			<%= content_tag :span, @nomination.nominee_transcript_file_name ? raw("<strong>Nominee Transcript</strong> #{link_to @nomination.nominee_transcript_file_name, nomination_download_transcript_url(@nomination.id)}<br />") : raw("<strong>Nominee Transcript(s)</strong> <span class='negative'>Missing</span><br />") %>
+			<%= content_tag :span, @nomination.nominee_statement_file_name ? raw("<strong>Nominee Statement</strong> #{link_to @nomination.nominee_statement_file_name, nomination_download_statement_url(@nomination.id)}<br />") : raw("<strong>Nominee Statement</strong> <span class='negative'>Missing</span>")%>
+			<%= content_tag :span, raw("<strong>Extra Document(s)</strong> #{link_to @nomination.misc_document_file_name, nomination_download_misc_url(@nomination.id)}<br />") if @nomination.misc_document_file_name %>
+		</p>
+	</div>
+	<div class='span-12 last' id='portrait'>
+		<%= content_tag :div, image_tag(@nomination.nominee_portrait.url(:medium)) + (@nomination.nominee_portrait.url.include?('missing') ? content_tag(:h4, raw('Missing portrait'), :class => 'negative') : '' ) %>
+	</div>
+	<br class='clear' />
+	<br class='clear' />
+	<%= status_check %>
+</div>
+<%= content_tag :div,raw(link_to "Save Changes and Exit", pseudo_logout_url, :class => 'positive button'), :class => 'right' unless current_user %>
+<%= render 'links', :nomination => @nomination %>

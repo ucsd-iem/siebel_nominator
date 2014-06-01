@@ -1,0 +1,47 @@
+<% title "Nominations" %>
+
+<%= form_tag nominations_path, :method => 'get', :id => "nominations_search" do %>
+	<%= hidden_field_tag :direction, params[:direction] %>
+	<%= hidden_field_tag :sort, params[:sort] %>
+	<p>
+		<%= text_field_tag :search, params[:search] %>
+		<%= submit_tag "Search", :name => nil %>&nbsp;&nbsp;&nbsp;<%= content_tag :small, link_to('Reset Search', nominations_path), :class => 'negative' if params[:sort] %></small>
+	</p>
+<% end %>
+
+<table id='nominations_table'>
+	<tr>
+		<th colspan=2 ><%= sortable 'nominee_lastname', 'Nominee' %></th>
+		<th class='department'><%= sortable 'nominee_department', 'Nominee Department' %></th>
+		<th><%= sortable 'nominator_lastname', 'Nominator' %></th>
+		<th><%= sortable 'created_at', 'Created' %></th>
+		<th><%= sortable 'updated_at', 'Updated' %></th>
+	</tr>
+	<% for nomination in @nominations %>
+		<tr class='nomination'>
+			<td class='portrait'>
+				<%= link_to image_tag(nomination.nominee_portrait.url(:thumb)), nomination_path(nomination) %><br />
+				<%= link_to nomination.nominee_name, nomination_path(nomination) %>
+			</td>
+			<td class='links'>
+				<%= content_tag :span, nomination.nominator_letter_file_name ? link_to('Nomination Letter', nomination_download_letter_url(nomination)) : raw("<strong>Nomination Letter(s)</strong> <span class='negative'>Missing</span>") %><br />
+				<%= content_tag :span, nomination.nominee_resume_file_name ? link_to('Nominee Resume', nomination_download_resume_url(nomination)) : raw("<strong>Nominee Resume(s)</strong> <span class='negative'>Missing</span>")  %><br />
+				<%= content_tag :span, nomination.nominee_transcript_file_name ? link_to('Nominee Transcript', nomination_download_transcript_url(nomination)) : raw("<strong>Nominee Transcript(s)</strong> <span class='negative'>Missing</span>") %><br />
+				<%= content_tag :span, nomination.nominee_statement_file_name ? link_to('Nominee Statement', nomination_download_statement_url(nomination)) : raw("<strong>Nominee Statement</strong> <span class='negative'>Missing</span>")%><br />
+				<%= content_tag :span, nomination.misc_document_file_name ? link_to('Extra Document(s)', nomination_download_misc_url(nomination)) : raw("<strong>No extra documents</strong>") %>
+			</td>
+			<td class='department'><%=link_to nomination.nominee_department.upcase, nomination %></td>
+			<td>
+				<%= link_to nomination.user.name, nomination_path(nomination) %><br />
+				<%= mail_to nomination.user.email %>
+			</td>
+			<td><%= nomination.created_at.strftime "%b %e, %l:%M %p" %></td>
+			<td><%= nomination.updated_at.strftime "%b %e, %l:%M %p" %></td>
+		</tr>
+	<% end %>
+</table>
+
+<%= will_paginate @nominations %>
+
+<br /><br />
+<h3><%= link_to "New Nomination", new_nomination_path %></h3>

@@ -1,0 +1,10 @@
+<h3>
+  <% if nomination.user == current_user %>
+	  <%= link_to_unless_current 'Edit', edit_nomination_path(nomination) do link_to 'Show', nomination end %>
+	<% end %>
+	<%= raw(' | ' + link_to('Back', nominations_path)) if current_user %>
+	
+	<% if nomination.user == current_user %>
+	  <%= raw(' | ' + link_to('Delete', nomination, :confirm => 'Are you sure?  This will permanently delete all data associated with this nomination.', :method => :delete)) %>
+	<% end %>
+</h3>

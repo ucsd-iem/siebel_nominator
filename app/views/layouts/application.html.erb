@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="description" content="Siebel Scholars 2010"/>
+		<meta name="keywords" content="Siebel, Scholars"/>
+	    <title>UC San Diego Siebel Scholar Nominations :: <%= (content_for?(:title) ? yield(:title) : Time.now.year + 1) %> </title>
+
+		<%= stylesheet_link_tag "application" %>
+		<!--[if lte IE 8]><%= stylesheet_link_tag "application-ie", :media => "all" %><![endif]-->
+		<%= stylesheet_link_tag 'application-print', :media => "print" %>	
+		
+		<%= javascript_include_tag "application" %>
+		<%= csrf_meta_tag %>
+	</head>
+	<body>
+		<div id="overlay" style="display:none;"></div>
+		<div id="opaque_overlay" style="display:none;">
+			<div id="wait_box">
+				<h2 class="padded">Please wait for the server to process your request</h2>
+				<%= image_tag("progress_bar.gif") %>
+			</div>
+		</div>
+		<div id="wrapper">
+			<div class="container">
+				<%= render :partial => "layouts/header" %>
+				<% flash.each do |name, msg| %><%= content_tag :div, msg, :id => "flash_#{name}" %><% end %>
+				<div id="content"><%= yield %></div>
+				<%= render :partial => "layouts/footer" %>
+			</div>
+		</div>
+		<script type="text/javascript">
+		document.write(unescape("%3Cscript src='" + (("https:" == document.location.protocol) ? "https://ssl-" : "http://")
+		+ "include.reinvigorate.net/re_.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script type="text/javascript">
+		try {
+		reinvigorate.track("7k7ip-w3lf8u92bv");
+		} catch(err) {}
+		</script>
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-19406073-3']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>
+	</body>
+</html>

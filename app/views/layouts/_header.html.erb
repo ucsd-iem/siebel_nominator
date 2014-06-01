@@ -1,0 +1,19 @@
+<div id="header">
+	<%= image_tag 'ucsd_logo.gif', :id => 'ucsd_logo' %>
+	<h1><%= "#{Time.now.year + 1} Siebel Scholar Nominations".upcase %></h1>
+</div>
+<ul id="navbar">
+	<li class='first<%= ' selected' if params[:controller] == 'welcome' && params[:action] == 'index' %>'><%= link_to "Home", root_path %></li>
+	<li class='<%= ' selected' if params[:controller] == 'welcome' && params[:action] == 'nomination_instructions' %>'><%= link_to "Nomination Instructions", instructions_path %></li>
+	<% unless current_user -%>
+	<% if Time.now > Date.new(2012,5,7) && Time.now < Date.new(Time.now.year,5,29) %>
+			<li class='<%= ' selected' if params[:controller] == 'nominations' && params[:action] == 'new' %>'><%= link_to "Nominate A Scholar", new_user_registration_path %></li>
+		<% end -%>		
+	<% else  -%>
+		<li class='<%= ' selected' if params[:controller] == 'nominations' && params[:action] == 'index' %>'><%= link_to "Nominations", nominations_path %></li>
+		<li class='last'><%= link_to "Logout", destroy_user_session_path %></li>	
+	<% end -%>
+</ul>
+<div id="search_box">
+	
+</div>

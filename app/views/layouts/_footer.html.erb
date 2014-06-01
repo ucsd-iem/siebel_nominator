@@ -1,0 +1,15 @@
+<div id="footer">
+	<p class='right'>
+		<%= link_to image_tag('jsoe.gif'), 'http://www.jacobsschool.ucsd.edu/' %>
+		<%= link_to image_tag('iem.png'), 'http://iem.ucsd.edu' %>
+	</p>
+	<p> 
+		UC San Diego 9500 Gilman Dr. La Jolla, CA 92093 (858) 534-2230<br /> 
+		Copyright &copy; <%= Time.now.year %> Regents of the University of California. All rights reserved.<br />
+		<%= mail_to 'siebel@ucsd.edu', 'Feedback' %> | 
+		This site is 
+		<%= link_to "HTML5", "http://validator.w3.org/check?uri=https://siebel.ucsd.edu" + request.fullpath %>,
+		<%= link_to "CSS3", "http://jigsaw.w3.org/css-validator/validator?uri=https://siebel.ucsd.edu" + request.fullpath + "&profile=css3&usermedium=all&warning=1&vextwarning=&lang=en"%>, and 
+		<%= link_to "Section 508", "http://www.cynthiasays.com/mynewtester/cynthia.exe?Url1=https://siebel.ucsd.edu/#{request.fullpath}&rptmode=-1&uri=https://siebel.ucsd.edu#{request.fullpath}" %> valid
+	</p>
+</div>
