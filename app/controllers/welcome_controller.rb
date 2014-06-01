@@ -10,6 +10,6 @@ class WelcomeController < ApplicationController
   end
   
   def pseudo_logout
-    redirect_to root_path, :notice => "Your nomination data has been saved."
+    redirect_to root_path, notice: "Your nomination data has been saved."
   end
 end

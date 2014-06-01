@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120507011041) do
+ActiveRecord::Schema.define(:version => 20140602045428) do
 
   create_table "nominations", :force => true do |t|
     t.string   "nominee_firstname"
@@ -49,6 +49,18 @@ ActiveRecord::Schema.define(:version => 20120507011041) do
     t.datetime "misc_document_updated_at"
     t.integer  "user_id"
     t.string   "slug"
+    t.string   "nominee_ucsd_address"
+    t.string   "nominee_ucsd_city"
+    t.string   "nominee_ucsd_state"
+    t.string   "nominee_ucsd_zip"
+    t.string   "nominee_ucsd_email"
+    t.string   "nominee_ucsd_phone"
+    t.string   "nominee_address"
+    t.string   "nominee_city"
+    t.string   "nominee_state"
+    t.string   "nominee_zip"
+    t.string   "nominee_email"
+    t.string   "nominee_phone"
   end
 
   add_index "nominations", ["token"], :name => "index_nominations_on_token", :unique => true

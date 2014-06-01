@@ -1,0 +1,14 @@
+before_script:
+  - cp config/application.yml.example config/application.yml
+  - cp config/database.yml.example config/database.yml
+  - cp config/initializers/devise.rb.example config/initializers/devise.rb
+  - cp config/initializers/secret_token.rb.example config/initializers/secret_token.rb
+  - mysql -e 'create database siebel_test;'
+  - bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare --trace
+bundler_args: --deployment --without development
+language: ruby
+script: bundle exec rspec spec --color --format documentation
+rvm:
+  - 1.9.3
+  - 2.1.2

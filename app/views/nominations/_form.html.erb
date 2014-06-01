@@ -10,21 +10,98 @@
 		</div>
 	<% end %>
 
-		<h2>Nominee</h2>
-		<div class='span-8'>
-			<%= f.label :nominee_firstname, "Nominee First Name*" %><br />
-			<%= f.text_field :nominee_firstname %>
+		<div class='padded'>
+			<div>
+				<h2>Nominee</h2>
+				<small><strong>* denotes required fields</strong></small>
+			</div>
+			
+			<hr />
+
+			<div class='span-8'>
+				<%= f.label :nominee_firstname, "Nominee First Name*" %><br />
+				<%= f.text_field :nominee_firstname %>
+			</div>
+			<div class='span-8'>
+				<%= f.label :nominee_lastname, "Nominee Last Name*" %><br />
+				<%= f.text_field :nominee_lastname %>
+			</div>
+			<div class='span-8 last'>
+				<%= f.label :nominee_department, "Nominee Department*" %><br />
+				<%= f.text_field :nominee_department %>
+			</div>
 		</div>
-		<div class='span-8'>
-			<%= f.label :nominee_lastname, "Nominee Last Name*" %><br />
-			<%= f.text_field :nominee_lastname %>
+
+		<hr class='padded'/>
+
+		<div class='padded'>
+			<h3>UCSD Contact Info</h3>
+
+			<div class='span-8'>
+				<%= f.label :nominee_ucsd_address, "Address*" %><br />
+				<%= f.text_field :nominee_ucsd_address, size: 40 %>
+			</div>
+			<div class='span-4'>
+				<%= f.label :nominee_ucsd_city, "City*" %><br />
+				<%= f.text_field :nominee_ucsd_city, size: 18 %>
+			</div>
+			
+			<%= f.hidden_field :nominee_ucsd_state, value: 'California' %>
+			
+			<div class='span-12 last'>
+				<%= f.label :nominee_ucsd_zip, "Zip*" %><br />
+				<%= f.text_field :nominee_ucsd_zip, size: 18 %>
+			</div>
+
+			<div class='span-8'>
+				<%= f.label :nominee_ucsd_phone, "Phone*" %><br />
+				<%= f.text_field :nominee_ucsd_phone %>
+			</div>
+			<div class='span-8 last'>
+				<%= f.label :nominee_ucsd_email, "Email*" %><br />
+				<%= f.text_field :nominee_ucsd_email %>
+			</div>
 		</div>
-		<div class='span-8 last'>
-			<%= f.label :nominee_department, "Nominee Department*" %><br />
-			<%= f.text_field :nominee_department %>
+
+		<hr class='padded'/>
+
+		<div class='padded clear'>
+			<h3>Home Contact Info</h3>
+
+			<div class='span-8'>
+				<%= f.label :nominee_address, "Address*" %><br />
+				<%= f.text_field :nominee_address, size: 40 %>
+			</div>
+			<div class='span-6'>
+				<%= f.label :nominee_city, "City*" %><br />
+				<%= f.text_field :nominee_city, size: 26 %>
+			</div>
+			
+			<div class='span-6'>
+				<%= f.label :nominee_state, "State*" %><br />
+				<%= subregion_select(:nomination, :nominee_state, Carmen::Country.coded('US')) %>
+			</div>
+
+			<div class='span-3 last'>
+				<%= f.label :nominee_zip, "Zip*" %><br />
+				<%= f.text_field :nominee_zip, size: 15 %>
+			</div>
+
+			<div class='span-8'>
+				<%= f.label :nominee_phone, "Phone*" %><br />
+				<%= f.text_field :nominee_phone %>
+			</div>
+			<div class='span-8 last'>
+				<%= f.label :nominee_email, "Email*" %><br />
+				<%= f.text_field :nominee_email %>
+			</div>
 		</div>
-		<small><strong>* denotes required fields</strong></small>
+
+
+
 	</div>
+
+		<hr class='padded'/>
 
 	<div class='clearfix'>
 		<div class='span-16 border'>	
@@ -51,7 +128,7 @@
 				<%= f.file_field :misc_document %>
 			</div>		
 		</div>
-		<div class='span-7  prepend-1 last'>
+		<div class='span-7 prepend-1 last'>
 			<%= f.label :nominee_portrait %><br />
 			<%= content_tag 'div', image_tag(@nomination.nominee_portrait.url(:thumb)), :id => 'portrait' if @nomination.nominee_portrait_file_name %>
 			<%= f.file_field :nominee_portrait %>

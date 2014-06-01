@@ -6,8 +6,9 @@ class Nomination < ActiveRecord::Base
   extend FriendlyId
   friendly_id :nominee_name, use: :slugged
   
-  attr_accessible :nominee_firstname, :nominee_lastname, :nominee_portrait, :misc_document, :nominee_statement, :nominee_resume, :nominee_transcript, :nominator_letter, :nominee_department
-  validates_presence_of :nominee_firstname, :nominee_lastname, :nominee_department
+  attr_accessible :nominee_firstname, :nominee_lastname, :nominee_portrait, :misc_document, :nominee_statement, :nominee_resume, :nominee_transcript, :nominator_letter, :nominee_department, :nominee_ucsd_address, :nominee_ucsd_city, :nominee_ucsd_state, :nominee_ucsd_zip, :nominee_ucsd_phone, :nominee_ucsd_email, :nominee_address, :nominee_city, :nominee_state, :nominee_zip, :nominee_phone, :nominee_email
+  validates_presence_of :nominee_firstname, :nominee_lastname, :nominee_department #, :nominee_ucsd_address, :nominee_ucsd_city, :nominee_ucsd_state, :nominee_ucsd_zip, :nominee_ucsd_email, :nominee_ucsd_phone, :nominee_address, :nominee_city, :nominee_state, :nominee_zip, :nominee_email, :nominee_phone
+
   email_name_regex  = '[\w\.%\+\-]+'
   domain_head_regex = '(?:[A-Z0-9\-]+\.)+'
   domain_tld_regex  = '(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|jobs|museum)'

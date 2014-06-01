@@ -1,5 +1,5 @@
 Thank you for your nomination of <%= @nominee_name %>. You can review or modify the nomination using the following link: <%= @url %>
 
-<%= @complete ? "This nomination appears to have all of the required documents. You may update the data until 3:00 PM, June 5." : "NOTE: This nomination is incomplete and will not be reviewed until all required materials are included.  Please add the required info by 3:00 PM, June 5." %>
+<%= @complete ? "This nomination appears to have all of the required documents. You may update the data until #{Settings.deadline.strftime('%l:%M %p on %b %e')}." : "NOTE: This nomination is incomplete and will not be reviewed until all required materials are included.  Please add the required info by #{Settings.deadline.strftime('%l:%M %p on %b %e')}." %>
 
 Contact us at siebel@ucsd.edu if you did not create this nomination or have any other questions.

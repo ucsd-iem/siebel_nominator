@@ -1,0 +1,11 @@
+defaults: &defaults
+  deadline: <%= Time.local(2014,'Jun',20,16) %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

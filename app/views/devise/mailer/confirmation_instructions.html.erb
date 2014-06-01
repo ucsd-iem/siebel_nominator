@@ -1,6 +1,6 @@
 <p>Welcome <%= @resource.first_name %>.</p>
 
 <p>You first need to confirm your account using the following link:
-<%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+<%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
 
-<p>Once your account is confirmed, you may edit the nomination until the deadline via the following url: <%= link_to "https://siebel.ucsd.edu/nominations?auth_token=#{@resource.authentication_token}", "https://siebel.ucsd.edu/nominations?auth_token=#{@resource.authentication_token}" %></p>
+<p>Once your account is confirmed, you may edit the nomination until the deadline via the following url: <%= link_to "https://siebel.ucsd.edu/nominations?auth_token=#{@resource.authentication_token}", "https://siebel.ucsd.edu/nominations?auth_token=#{@resource.authentication_token}" %>.  Please do not share this URL as it is the same as sharing your password.</p>

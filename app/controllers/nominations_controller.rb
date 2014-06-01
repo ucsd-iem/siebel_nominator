@@ -1,5 +1,9 @@
 class NominationsController < ApplicationController
+  # This is our new function that comes before Devise's one
+  before_filter :authenticate_user_from_token!
+  # This is Devise's authentication
   before_filter :authenticate_user!
+
   helper_method :sort_column, :sort_direction
   
   def download_letter
@@ -44,7 +48,6 @@ class NominationsController < ApplicationController
   end
   
   # GET /nominations
-  # GET /nominations.xml
   def index
     if current_user.admin
       @nominations = Nomination.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 5, :page => params[:page])      
@@ -54,12 +57,10 @@ class NominationsController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @nominations }
     end
   end
 
   # GET /nominations/1
-  # GET /nominations/1.xml
   def show
     @nomination = Nomination.find(params[:id])
     @nomination = nil unless current_user.nominations.include?(@nomination) || current_user.admin
@@ -67,7 +68,6 @@ class NominationsController < ApplicationController
     if Time.now < Settings.deadline
       respond_to do |format|
         format.html { render 'errors/404', :status => 404 unless @nomination}# show.html.erb
-        format.xml  { render :xml => @nomination }
       end
     else
       redirect_to(root_path, :notice => 'Sorry, you can no longer edit nominations') unless current_user
@@ -75,7 +75,6 @@ class NominationsController < ApplicationController
   end
 
   # GET /nominations/new
-  # GET /nominations/new.xml
   def new
     if Time.now < Settings.deadline
       @nomination = current_user.nominations.build
@@ -102,23 +101,19 @@ class NominationsController < ApplicationController
   end
 
   # POST /nominations
-  # POST /nominations.xml
   def create
     @nomination = current_user.nominations.create(params[:nomination])
 
     respond_to do |format|
       if @nomination.save
         format.html { redirect_to(thanks_url, :info => 'Nomination was successfully created.') }
-        format.xml  { render :xml => @nomination, :status => :created, :location => @nomination }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @nomination.errors, :status => :unprocessable_entity }
       end
     end
   end
 
   # PUT /nominations/1
-  # PUT /nominations/1.xml
   def update
     @nomination = Nomination.find(params[:id])
     @nomination = nil unless current_user.nominations.include?(@nomination) || current_user.admin
@@ -137,7 +132,6 @@ class NominationsController < ApplicationController
   end
 
   # DELETE /nominations/1
-  # DELETE /nominations/1.xml
   def destroy
     @nomination = Nomination.find(params[:id])
     @nomination.destroy if current_user.nominations.include?(@nomination) || current_user.admin

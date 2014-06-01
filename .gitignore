@@ -34,7 +34,8 @@ tags
 /config/deploy.rb
 /config/deploy
 /config/environments/production.rb
-/config/initializers/searchify.rb
+/config/initializers/devise.rb
+/config/initializers/secret_token.rb
 /coverage
 /db/*.sqlite3
 /doc
@@ -43,4 +44,5 @@ tags
 /public/system
 /spec/tmp
 /tmp
+/uploads
 /vendor/bundle

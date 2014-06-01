@@ -33,6 +33,8 @@ module SiebelScholars
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.i18n.enforce_available_locales = true
+
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
 
@@ -44,6 +46,8 @@ module SiebelScholars
     
     # Enable the asset pipeline
     config.assets.enabled = true
+
+    config.assets.paths << "#{Rails.root}/app/assets/pdfs"
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'

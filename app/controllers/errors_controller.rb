@@ -6,5 +6,4 @@ class ErrorsController < ApplicationController
   def render_422
     render 'errors/422', :status => 422
   end
-
 end
